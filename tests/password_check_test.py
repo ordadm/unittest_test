@@ -16,6 +16,11 @@ class PasswordCheckTest(TestCase):
         self.assertEqual(password_check('123456788'),
                          f'пароль должен содержать хотя бы один из символов {password_verify.passw.allowed_sign}')
 
+    def test_ukrokirilica(self):
+        self.assertEqual(password_check('sdfK-JH1ор'), f'пароль должен содержать только латиницу, цифры и символы {password_verify.passw.allowed_sign}')
+
+
+
 
 if __name__ == '__main__':
     main()
