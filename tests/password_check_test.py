@@ -11,7 +11,10 @@ class PasswordCheckTest(TestCase):
         self.assertEqual(password_check('ораjk-1'), 'пароль слишком короткий')
 
     def test_allowed_sign(self):
-        self.assertEqual(password_check('jhjhshjh'), f'пароль должен содержать хотя бы один из символов {password_verify.passw.allowed_sign}')
+        self.assertEqual(password_check('jhjhshjh'),
+                         f'пароль должен содержать хотя бы один из символов {password_verify.passw.allowed_sign}')
+        self.assertEqual(password_check('123456788'),
+                         f'пароль должен содержать хотя бы один из символов {password_verify.passw.allowed_sign}')
 
 
 if __name__ == '__main__':
