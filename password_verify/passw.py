@@ -29,7 +29,7 @@ def password_check(password) -> str:
 
     # проверка на наличие строчных символов
     elif (any(sign.islower() for sign in password)) == False:
-        return f'пароль должен содержать хотя бы один строчный букв'
+        return f'пароль должен содержать хотя бы одну строчную букву'
 
     # проверка на наличие заглавных символов
     elif (any(sign.isupper() for sign in password)) == False:

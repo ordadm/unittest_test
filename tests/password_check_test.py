@@ -17,9 +17,21 @@ class PasswordCheckTest(TestCase):
                          f'пароль должен содержать хотя бы один из символов {password_verify.passw.allowed_sign}')
 
     def test_ukrokirilica(self):
-        self.assertEqual(password_check('sdfK-JH1ор'), f'пароль должен содержать только латиницу, цифры и символы {password_verify.passw.allowed_sign}')
+        self.assertEqual(password_check('sdfK-JH1ор'),
+                         f'пароль должен содержать только латиницу, цифры и символы {password_verify.passw.allowed_sign}')
 
+    def test_lower(self):
+        self.assertEqual(password_check('KJHJH-JHJH'), 'пароль должен содержать хотя бы одну строчную букву')
 
+    def test_upper(self):
+        self.assertEqual(password_check('iuiou-kjhjh'), 'пароль должен содержать хотя бы одну загланую букву')
+
+    def test_digit(self):
+        self.assertEqual(password_check('iuiou-kjJHHF'), 'пароль должен содержать хотя бы одну цифру')
+
+    def test_godno(self):
+        self.assertEqual(password_check('iuid12ou-kjJHHF'),
+                         'поздравляем! пароль соответствует всем требованиям безопасности')
 
 
 if __name__ == '__main__':
