@@ -11,7 +11,39 @@
 # если пароль соответствует, то вывести сообщение - "поздравляем! пароль соответствует всем требованиям безопасности"
 
 def password_check(password) -> str:
-    pass
+    allowed_sign: str = '_.-'
+    ukrokirilica: str = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯіІїЇґҐєЄ'
+
+    #     проверка пароля на длину, количество символов
+    if len(password) < 8:
+        return 'пароль слишком короткий'
+
+    # проверка пароля на наличие символов
+    elif not any(sign in password for sign in allowed_sign):
+        return f'пароль должен содержать хотя бы один из символов {allowed_sign}'
+
+    # проверка пароля на отсутствие кирилицы и украинских символов
+    elif any(sign in password for sign in ukrokirilica):
+        return f'пароль должен содержать только латиницу, цифры и символы {allowed_sign}'
+
+    # проверка на наличие строчных символов
+    elif (any(sign.islower() for sign in password)) == False:
+        return f'пароль должен содержать хотя бы один строчный букв'
+
+    # проверка на наличие заглавных символов
+    elif (any(sign.isupper() for sign in password)) == False:
+        return f'пароль должен содержать хотя бы одну загланую букву'
+
+    # проверка на наличие цифр
+    elif (any(sign.isdigit() for sign in password)) == False:
+        return f'пароль должен содержать хотя бы одну цифру'
+
+    # пароль соотвествуте требованиям
+    else:
+        return f'поздравляем! пароль соответствует всем требованиям безопасности'
 
 if __name__ == '__main__':
     psw: str = input('Придумайте пароль:')
+    answer: str = password_check(psw)
+    print(answer)
+
