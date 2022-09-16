@@ -5,6 +5,16 @@ from password_verify.passw import password_check
 
 
 class PasswordCheckTest(TestCase):
+
+    #отрицательный? тест!
+    def test_type(self):
+        self.assertEqual(type(password_check('1sdfsfs')), str)
+        self.assertRaises(password_check(11114434), TypeError())
+        self.assertRaises(password_check(111.4434), TypeError())
+        self.assertRaises(password_check(True), TypeError())
+        self.assertRaises(password_check([]), TypeError())
+        self.assertRaises(password_check({}), TypeError())
+
     def test_len(self):
         self.assertEqual(password_check('sdffdff'), 'пароль слишком короткий')
         self.assertEqual(password_check('1234567'), 'пароль слишком короткий')
